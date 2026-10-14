@@ -386,19 +386,42 @@ This section provides a complete dictionary of every command utilized to build, 
 | `git checkout --orphan <name>` | Creates a completely new, independent branch with zero parent commits and a clean history. |
 | `git branch -M main` | Renames the current branch forcibly to `main`. |
 | `git push origin main` | Transmits local commits on branch `main` to the remote repository named `origin`. |
-| `git push --force origin main` | Overwrites the remote branch history with the local branch history (used after history rewriting). |
+### 8.4 Docker & Containerization Commands
+
+| Command | Exact Meaning and Purpose |
+| :--- | :--- |
+| `docker compose up --build` | Builds local images for `backend` and `frontend`, pulls `mysql:8.0`, sets up networks and persistent volumes, and boots the entire full-stack application. |
+| `docker compose down` | Gracefully stops and tears down running containers, networks, and internal links without deleting persistent database volumes. |
+| `docker compose down -v` | Tears down containers AND removes the persistent named volume (`mysql_data`), resetting the database to factory seed data. |
+| `docker compose logs -f` | Streams real-time live logs from all three containers (`ems-frontend-ui`, `ems-backend-api`, `ems-mysql-db`) simultaneously. |
 
 ---
 
 ## 9. Step-by-Step Setup, Deployment & Execution Guide
 
-### Phase 1: Clone the Repository
+### Option A: Automated Multi-Container Deployment with Docker (Recommended)
+
+To run the complete production-grade stack (MySQL 8.0 + Express API + Production Angular Nginx) with zero host dependencies installed:
+
+```bash
+docker compose up --build
+```
+
+- **Frontend Application**: [http://localhost:4200](http://localhost:4200)
+- **Backend REST API**: [http://localhost:3000](http://localhost:3000)
+- **MySQL Database**: `localhost:3306`
+
+---
+
+### Option B: Manual Host Setup (Without Docker)
+
+#### Phase 1: Clone the Repository
 ```bash
 git clone https://github.com/kshitijkhede/employee-management-system.git
 cd employee-management-system
 ```
 
-### Phase 2: Launch the Backend API
+#### Phase 2: Launch the Backend API
 ```bash
 cd backend
 npm install
@@ -408,7 +431,7 @@ npm start
 * If MySQL is running, it connects automatically.
 * If MySQL is not running, it initializes the local fallback database.
 
-### Phase 3: Launch the Frontend Client
+#### Phase 3: Launch the Frontend Client
 In a second terminal window:
 ```bash
 cd frontend
@@ -421,7 +444,7 @@ $env:NODE_OPTIONS="--openssl-legacy-provider"; npm start
 export NODE_OPTIONS=--openssl-legacy-provider && npm start
 ```
 
-### Phase 4: Access the System
+#### Phase 4: Access the System
 Open your web browser and navigate to:
 ```
 http://localhost:4200
@@ -441,16 +464,16 @@ http://localhost:4200
 | **Database Engine** | **MySQL** | PostgreSQL, MongoDB, SQLite | MySQL is a world standard for structured relational data and ACID compliance. PostgreSQL provides advanced JSON indexing and GIS types. MongoDB is schemaless (better for unstructured documents). |
 | **Database Access** | **Raw SQL (`mysql2`)** | Prisma, TypeORM, Sequelize | Raw SQL provides total transparency, zero ORM overhead, and fine-tuned control over queries. ORMs (like Prisma) offer auto-generated TypeScript types and automatic schema migrations. |
 
-### 10.2 Recommended Future Enhancements
+### 10.2 Implemented & Recommended Enhancements
 
-1. **Authentication & RBAC**:
+1. **Containerization with Docker** *(✅ Implemented)*:
+   - Added `Dockerfile` for backend (Node 18 Alpine), multi-stage `Dockerfile` with Nginx for frontend, and root `docker-compose.yml` orchestrating MySQL 8.0, Express, and Angular.
+2. **Authentication & RBAC** *(Recommended Next Step)*:
    - Integrate **JSON Web Tokens (JWT)** with HTTP-only cookies and bcrypt password hashing.
    - Implement Role-Based Access Control (`Admin`, `Manager`, `Employee`) with Angular Route Guards (`CanActivate`).
-2. **Server-Side Pagination & Sorting**:
+3. **Server-Side Pagination & Sorting** *(Recommended for Large Datasets)*:
    - For datasets exceeding 10,000 employees, transition from client-side filtering to SQL pagination using `LIMIT` and `OFFSET`.
-3. **Containerization with Docker**:
-   - Add a `docker-compose.yml` file to package the Angular client, Express server, and MySQL database into isolated containers with a single `docker compose up` command.
-4. **Automated Testing Suite**:
+4. **Automated Testing Suite** *(Recommended for CI/CD)*:
    - Frontend unit tests via Jasmine & Karma for components and services.
    - Backend integration tests via Jest and Supertest for REST API endpoints.
 

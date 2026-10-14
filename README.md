@@ -53,7 +53,22 @@ employee-management-system/
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ⚡ Quick Start with Docker (Recommended)
+
+Run the entire full-stack stack (MySQL 8.0 + Express API + Angular Production Nginx) with a single command:
+
+```bash
+docker compose up --build
+```
+- **Frontend App**: [http://localhost:4200](http://localhost:4200)
+- **Backend API**: [http://localhost:3000](http://localhost:3000)
+- **MySQL Database**: `localhost:3306`
+
+---
+
+### Manual Setup (Without Docker)
+
+#### Prerequisites
 
 - **Node.js**: v14+ (Compatible with modern Node versions including Node 18, 20, and 24)
 - **npm**: v6+
