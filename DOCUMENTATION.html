@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Management System - Complete Technical Documentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @bottom-center {
+      content: counter(page);
+      font-family: 'Inter', sans-serif;
+      font-size: 9pt;
+      color: #64748b;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.65;
+    font-size: 13.5px;
+    margin: 0;
+    padding: 20px 40px;
+  }
+
+  .header-cover {
+    padding: 30px 0 25px 0;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 30px;
+  }
+  .badge-tag {
+    display: inline-block;
+    background: #e0e7ff;
+    color: #4338ca;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .doc-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.5px;
+  }
+  .doc-subtitle {
+    font-size: 14px;
+    color: #475569;
+    margin: 0;
+  }
+
+  .doc-h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding-bottom: 6px;
+    margin-top: 32px;
+    margin-bottom: 14px;
+    page-break-after: avoid;
+  }
+  .doc-h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    page-break-after: avoid;
+  }
+  .doc-h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+  }
+  .doc-h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+
+  .doc-p {
+    margin: 0 0 10px 0;
+    color: #334155;
+    text-align: justify;
+  }
+
+  .doc-li, .doc-ol-li {
+    margin-bottom: 5px;
+    color: #334155;
+    margin-left: 20px;
+  }
+
+  .callout {
+    background: #f8fafc;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .callout p { margin: 0; color: #1e293b; }
+
+  .code-block {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 11.5px;
+    line-height: 1.5;
+    overflow-x: auto;
+    margin: 14px 0;
+    page-break-inside: avoid;
+    border: 1px solid #1e293b;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    background: #f1f5f9;
+    color: #0f172a;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .table-container {
+    margin: 16px 0;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+    text-align: left;
+    padding: 9px 12px;
+    border: 1px solid #cbd5e1;
+  }
+  td {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .doc-hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 28px 0;
+  }
+
+  a {
+    color: #4f46e5;
+    text-decoration: none;
+  }
+  a:hover { text-decoration: underline; }
+
+  @media print {
+    body { padding: 0; }
+    .code-block, table, .callout { page-break-inside: avoid; }
+    h1, h2, h3 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+  <div class="header-cover">
+    <div class="badge-tag">Full-Stack Enterprise Architecture</div>
+    <div class="doc-title">Employee Management System (EMS)</div>
+    <div class="doc-subtitle">Exhaustive Master Technical Specification & Implementation Guide | Author: <strong>Kshitij Khede</strong></div>
+  </div>
+  <h1 class='doc-h1'>Comprehensive Technical Documentation: Employee Management System</h1>
+<div class='callout'><p><strong>Author:</strong> Kshitij Khede</p></div>
+<div class='callout'><p><strong>Repository:</strong> <a href="https://github.com/kshitijkhede/employee-management-system">https://github.com/kshitijkhede/employee-management-system</a></p></div>
+<div class='callout'><p><strong>Architecture:</strong> Full-Stack Single Page Application (Angular 12 + Node.js/Express + MySQL / Local Fallback)</p></div>
+<div class='callout'><p><strong>License:</strong> MIT License</p></div>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>Table of Contents</h2>
+<li class='doc-ol-li'><strong>1. </strong> <a href="#1-executive-summary--high-level-architecture">Executive Summary &amp; High-Level Architecture</a></li>
+<li class='doc-ol-li'><strong>2. </strong> <a href="#2-what-why-and-how-core-engineering-philosophy">What, Why, and How (Core Engineering Philosophy)</a></li>
+<li class='doc-ol-li'><strong>3. </strong> <a href="#3-technology-stack--package-encyclopedia">Technology Stack &amp; Package Encyclopedia</a></li>
+<li class='doc-ol-li'><strong>4. </strong> <a href="#4-core-architectural-concepts--design-patterns">Core Architectural Concepts &amp; Design Patterns</a></li>
+<li class='doc-ol-li'><strong>5. </strong> <a href="#5-frontend-deep-dive-angular-12-spa">Frontend Deep-Dive (Angular 12 SPA)</a></li>
+<li class='doc-ol-li'><strong>6. </strong> <a href="#6-backend-deep-dive-nodejs--express-rest-api">Backend Deep-Dive (Node.js &amp; Express REST API)</a></li>
+<li class='doc-ol-li'><strong>7. </strong> <a href="#7-database-design--dual-storage-architecture">Database Design &amp; Dual-Storage Architecture</a></li>
+<li class='doc-ol-li'><strong>8. </strong> <a href="#8-exhaustive-command-reference--command-dictionary">Exhaustive Command Reference &amp; Command Dictionary</a></li>
+<li class='doc-ol-li'><strong>9. </strong> <a href="#9-step-by-step-setup-deployment--execution-guide">Step-by-Step Setup, Deployment &amp; Execution Guide</a></li>
+<li class='doc-ol-li'><strong>10. </strong> <a href="#10-alternative-technologies-trade-offs--future-enhancements">Alternative Technologies, Trade-offs &amp; Future Enhancements</a></li>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>1. Executive Summary &amp; High-Level Architecture</h2>
+<h3 class='doc-h3'>1.1 Project Summary</h3>
+<p class='doc-p'>The <strong>Employee Management System (EMS)</strong> is an enterprise-grade full-stack web application developed to streamline organizational workforce administration. It provides administrative personnel with an intuitive interface to register new employees, inspect workforce rosters, filter and query records in real-time, modify employment details, and remove records safely with confirmation dialogs.</p>
+<p class='doc-p'>The application adheres to clean architecture principles by separating the visual user interface (presentation layer) from business logic (controller layer) and persistent storage (database layer).</p>
+<h3 class='doc-h3'>1.2 System Architecture Diagram</h3>
+<pre class='code-block'><code class='language-'>+-----------------------------------------------------------------------------------+
+|                              CLIENT-SIDE (PORT 4200)                              |
+|                                                                                   |
+|  +-----------------------------------------------------------------------------+  |
+|  |                             Angular 12 SPA                                  |  |
+|  |  +--------------------+  +----------------------+  +---------------------+  |  |
+|  |  | EmployeeListComponent|  | EmployeeFormComponent|  |EmployeeDetailComp   |  |  |
+|  |  | (Roster &amp; Search)  |  | (Add &amp; Edit Form)    |  | (Single View)       |  |  |
+|  |  +---------+----------+  +----------+-----------+  +----------+----------+  |  |
+|  |            \                        |                         /             |  |
+|  |             +-----------------------+------------------------+              |  |
+|  |                                     |                                       |  |
+|  |                         +-----------v-----------+                           |  |
+|  |                         |    EmployeeService    |                           |  |
+|  |                         |  (HttpClient / RxJS)  |                           |  |
+|  +-------------------------+-----------+-----------+---------------------------+  |
++----------------------------------------|------------------------------------------+
+                                         | HTTP REST Requests (JSON)
+                                         | CORS Enabled
+                                         v
++-----------------------------------------------------------------------------------+
+|                              SERVER-SIDE (PORT 3000)                              |
+|                                                                                   |
+|  +-----------------------------------------------------------------------------+  |
+|  |                           Express.js REST API                               |  |
+|  |                                                                             |  |
+|  |  server.js (Middleware Pipeline: cors, express.json, logging, 404 router)   |  |
+|  |                                     |                                       |  |
+|  |                     employee.routes.js (/api/employees)                     |  |
+|  |                                     |                                       |  |
+|  |                   employee.controller.js (CRUD Handlers)                    |  |
+|  |                                     |                                       |  |
+|  |                         config/db.js (Proxy Layer)                          |  |
+|  +-------------------------------------+---------------------------------------+  |
++----------------------------------------|------------------------------------------+
+                                         |
+                     +-------------------+-------------------+
+                     |                                       |
+           (If MySQL is running)                   (If MySQL unavailable)
+                     v                                       v
++------------------------------------+   +------------------------------------------+
+|          MySQL Database            |   |           Persistent Local DB            |
+|       (employee_db.employees)      |   |       (backend/data/employees.json)      |
+|  Host: localhost:3306              |   |  Built-in Zero-Config Fallback Storage   |
++------------------------------------+   +------------------------------------------+</code></pre>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>2. What, Why, and How (Core Engineering Philosophy)</h2>
+<p class='doc-p'>To fully comprehend this codebase, every engineering choice must be understood through the lens of <strong>What</strong> is being accomplished, <strong>Why</strong> that solution was chosen, and <strong>How</strong> it is executed.</p>
+<h3 class='doc-h3'>2.1 Decoupled Full-Stack Architecture</h3>
+<li class='doc-li'><strong>What</strong>: The frontend (Angular) and backend (Express) live in isolated directories (<code>frontend/</code> and <code>backend/</code>) and communicate solely through asynchronous HTTP/JSON API contracts.</li>
+<li class='doc-li'><strong>Why</strong>: Monolithic server-rendered templates (like PHP or JSP) tightly couple page generation with server logic. By decoupling, the backend can serve web browsers, mobile apps, or third-party integrations interchangeably. Furthermore, frontend and backend teams can develop, test, and deploy independently.</li>
+<li class='doc-li'><strong>How</strong>: The Angular frontend runs on port <code>4200</code>, Express runs on port <code>3000</code>. Express includes the <code>cors()</code> middleware to permit cross-origin requests from the client.</li>
+<h3 class='doc-h3'>2.2 Client-Side Live Search &amp; Filtering</h3>
+<li class='doc-li'><strong>What</strong>: As the administrator types into the search box, the table immediately updates without reloading the page or sending new queries to the server.</li>
+<li class='doc-li'><strong>Why</strong>: Instant feedback improves productivity. For small to medium employee directories (hundreds to thousands of records), client-side filtering avoids unnecessary server round-trips and database strain.</li>
+<li class='doc-li'><strong>How</strong>: A TypeScript getter property <code>filteredEmployees</code> in <code>employee-list.component.ts</code> intercepts the raw employee list and applies <code>Array.prototype.filter()</code> against <code>name</code>, <code>email</code>, <code>department</code>, and <code>designation</code>.</li>
+<h3 class='doc-h3'>2.3 Dual-State Form Component (Create vs. Edit)</h3>
+<li class='doc-li'><strong>What</strong>: A single Angular component (<code>EmployeeFormComponent</code>) handles both creating a new employee and modifying an existing one.</li>
+<li class='doc-li'><strong>Why</strong>: The fields, validations, and UI layout for creating and editing are identical. Creating two separate components would cause code duplication and maintenance hazards.</li>
+<li class='doc-li'><strong>How</strong>: The component inspects the active route using Angular&#x27;s <code>ActivatedRoute.snapshot.paramMap.get(&#x27;id&#x27;)</code>. If an <code>id</code> is present, it toggles <code>isEditMode = true</code>, fetches the record, and populates the form via <code>form.patchValue()</code>. On submission, it conditionally calls <code>service.update()</code> instead of <code>service.create()</code>.</li>
+<h3 class='doc-h3'>2.4 Graceful Database Degradation (Dual-Storage Strategy)</h3>
+<li class='doc-li'><strong>What</strong>: The backend connects to MySQL if available; if not, it automatically and transparently switches to a local persistent JSON database without crashing or erroring.</li>
+<li class='doc-li'><strong>Why</strong>: Traditional enterprise projects fail instantly when cloned by developers who do not have a local MySQL service installed, configured, and running. This creates high setup friction. The dual-storage pattern guarantees <strong>zero-setup execution</strong> while remaining 100% production-ready for MySQL.</li>
+<li class='doc-li'><strong>How</strong>: <code>config/db.js</code> attempts a handshake with MySQL with a strict timeout. If the connection fails, it routes queries to <code>config/fallbackDb.js</code>, which implements the exact same Promise query interface (<code>[rows, fields] = await db.query(sql, params)</code>).</li>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>3. Technology Stack &amp; Package Encyclopedia</h2>
+<p class='doc-p'>This section explains every single tool, language, runtime, library, and package utilized across the repository.</p>
+<h3 class='doc-h3'>3.1 Runtime &amp; Language Specifications</h3>
+<div class='table-container'><table>
+<thead><tr><th>Tool / Technology</th><th>Version</th><th>Purpose in this Project</th></tr></thead>
+<tbody>
+<tr><td><strong>Node.js</strong></td><td>v14+ (v24 compatible)</td><td>Asynchronous event-driven JavaScript runtime engine that executes server-side code and powers build tools.</td></tr>
+<tr><td><strong>TypeScript</strong></td><td>~4.3.5</td><td>Statically typed superset of JavaScript used across Angular. Provides compilation-time error detection, strict typing for models, and IDE autocompletion.</td></tr>
+<tr><td><strong>JavaScript (ES6+)</strong></td><td>Modern</td><td>Language used in Node.js/Express backend (Promises, async/await, arrow functions, destructuring).</td></tr>
+<tr><td><strong>HTML5 &amp; CSS3</strong></td><td>Standard</td><td>Semantic markup and custom modern CSS variables for styling without heavy external CSS frameworks.</td></tr>
+</tbody></table></div>
+<hr class='doc-hr'>
+<h3 class='doc-h3'>3.2 Backend Dependencies (<code>backend/package.json</code>)</h3>
+<h4 class='doc-h4'>Production Dependencies (<code>dependencies</code>):</h4>
+<li class='doc-ol-li'><strong>1. </strong> <strong><code>express</code> (<code>^4.19.2</code>)</strong>:</li>
+<li class='doc-li'><em>What it is</em>: Fast, unopinionated, minimalist web framework for Node.js.</li>
+<li class='doc-li'><em>Role in EMS</em>: Handles incoming HTTP requests, matches them against registered routes (<code>/api/employees</code>), parses JSON payloads, and sends JSON responses.</li>
+<li class='doc-ol-li'><strong>2. </strong> <strong><code>mysql2</code> (<code>^3.11.0</code>)</strong>:</li>
+<li class='doc-li'><em>What it is</em>: High-performance MySQL client for Node.js with support for Promises and prepared statements.</li>
+<li class='doc-li'><em>Role in EMS</em>: Establishes connection pools to MySQL, executes parameterized SQL queries, and prevents SQL injection vulnerabilities.</li>
+<li class='doc-ol-li'><strong>3. </strong> <strong><code>cors</code> (<code>^2.8.5</code>)</strong>:</li>
+<li class='doc-li'><em>What it is</em>: Express middleware that configures Cross-Origin Resource Sharing headers.</li>
+<li class='doc-li'><em>Role in EMS</em>: Allows the browser on <code>http://localhost:4200</code> (Angular) to make HTTP requests to <code>http://localhost:3000</code> (Express) without being blocked by browser Same-Origin Policy.</li>
+<li class='doc-ol-li'><strong>4. </strong> <strong><code>dotenv</code> (<code>^16.4.5</code>)</strong>:</li>
+<li class='doc-li'><em>What it is</em>: Zero-dependency module that loads environment variables from a <code>.env</code> file into Node&#x27;s <code>process.env</code>.</li>
+<li class='doc-li'><em>Role in EMS</em>: Separates database credentials (host, user, password, port) from code, adhering to 12-Factor App methodology.</li>
+<h4 class='doc-h4'>Development Dependencies (<code>devDependencies</code>):</h4>
+<li class='doc-ol-li'><strong>1. </strong> <strong><code>nodemon</code> (<code>^3.1.4</code>)</strong>:</li>
+<li class='doc-li'><em>What it is</em>: Tool that monitors directory files and automatically restarts the Node server upon code modifications.</li>
+<li class='doc-li'><em>Role in EMS</em>: Enhances developer velocity during backend debugging and development (<code>npm run dev</code>).</li>
+<hr class='doc-hr'>
+<h3 class='doc-h3'>3.3 Frontend Dependencies (<code>frontend/package.json</code>)</h3>
+<h4 class='doc-h4'>Core Angular Framework Packages:</h4>
+<li class='doc-ol-li'><strong>1. </strong> <strong><code>@angular/core</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>The fundamental engine of Angular. Provides component decorators (<code>@Component</code>), dependency injection (<code>@Injectable</code>), lifecycle hooks (<code>OnInit</code>), and the Angular rendering pipeline.</li>
+<li class='doc-ol-li'><strong>2. </strong> <strong><code>@angular/common</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Common Angular directives and pipes like <code><em>ngIf</code>, <code></em>ngFor</code>, <code>currency</code>, <code>date</code>, and <code>lowercase</code>.</li>
+<li class='doc-ol-li'><strong>3. </strong> <strong><code>@angular/common/http</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Provides <code>HttpClientModule</code> and <code>HttpClient</code>, enabling typed, observable-based HTTP requests (<code>get</code>, <code>post</code>, <code>put</code>, <code>delete</code>).</li>
+<li class='doc-ol-li'><strong>4. </strong> <strong><code>@angular/forms</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Provides <code>ReactiveFormsModule</code>, <code>FormBuilder</code>, <code>FormGroup</code>, <code>FormControl</code>, and built-in validators (<code>Validators.required</code>, <code>Validators.email</code>, <code>Validators.min</code>).</li>
+<li class='doc-ol-li'><strong>5. </strong> <strong><code>@angular/router</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Provides single-page navigation, mapping URL paths to components, extracting path parameters (<code>:id</code>), and route redirects.</li>
+<li class='doc-ol-li'><strong>6. </strong> <strong><code>@angular/platform-browser</code> &amp; <code>@angular/platform-browser-dynamic</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Boots and renders the Angular application within DOM-based desktop and mobile web browsers.</li>
+<li class='doc-ol-li'><strong>7. </strong> <strong><code>zone.js</code> (<code>~0.11.4</code>)</strong>:</li>
+<li class='doc-li'>Execution context library that intercepts asynchronous browser tasks (clicks, timers, HTTP responses) and notifies Angular to run change detection.</li>
+<li class='doc-ol-li'><strong>8. </strong> <strong><code>rxjs</code> (<code>~6.6.0</code>)</strong>:</li>
+<li class='doc-li'>Reactive Extensions for JavaScript. Handles asynchronous streams via <code>Observable</code>, <code>subscribe</code>, and event transformations.</li>
+<li class='doc-ol-li'><strong>9. </strong> <strong><code>tslib</code> (<code>^2.3.0</code>)</strong>:</li>
+<li class='doc-li'>Runtime library containing TypeScript helper functions used when compiled JavaScript targets older specifications.</li>
+<h4 class='doc-h4'>Build Tools &amp; Development Dependencies:</h4>
+<li class='doc-ol-li'><strong>1. </strong> <strong><code>@angular/cli</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Official command-line interface for scaffolding, building, serving, and testing Angular applications.</li>
+<li class='doc-ol-li'><strong>2. </strong> <strong><code>@angular-devkit/build-angular</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Webpack-based build system responsible for bundling, minifying, tree-shaking, and Ahead-of-Time (AOT) compilation.</li>
+<li class='doc-ol-li'><strong>3. </strong> <strong><code>@angular/compiler-cli</code> (<code>~12.2.0</code>)</strong>:</li>
+<li class='doc-li'>Compiles Angular templates into efficient executable JavaScript instructions.</li>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>4. Core Architectural Concepts &amp; Design Patterns</h2>
+<h3 class='doc-h3'>4.1 Single Page Application (SPA) vs. Multi-Page Application (MPA)</h3>
+<li class='doc-li'>Traditional MPAs request a brand new HTML document from the server on every link click, causing full-page reloads and white flashes.</li>
+<li class='doc-li'>This project is an <strong>SPA</strong>: the initial request loads a single shell document (<code>index.html</code>) along with compiled JavaScript bundles. When the user navigates between <code>/</code>, <code>/add</code>, <code>/edit/1</code>, and <code>/view/1</code>, the Angular Router intercepts the browser URL, destroys unneeded view components, and mounts new components dynamically into <code>&lt;router-outlet&gt;</code> without reloading the page.</li>
+<h3 class='doc-h3'>4.2 Reactive Forms (Model-Driven Approach)</h3>
+<p class='doc-p'>Angular provides two approaches to forms: <strong>Template-Driven</strong> and <strong>Reactive</strong>.</p>
+<li class='doc-li'>This project utilizes <strong>Reactive Forms</strong> (<code>ReactiveFormsModule</code>).</li>
+<li class='doc-li'><strong>Why</strong>: Reactive forms define the form model programmatically in TypeScript (<code>FormBuilder.group({...})</code>). This enables predictable immutability, synchronous unit testing, dynamic validator addition, and fine-grained control over touch states (<code>markAllAsTouched()</code>).</li>
+<h3 class='doc-h3'>4.3 Observables vs. Promises</h3>
+<li class='doc-li'>Native browser <code>fetch</code> and JavaScript Promises handle single asynchronous values that cannot be cancelled once initiated.</li>
+<li class='doc-li'>Angular&#x27;s <code>HttpClient</code> returns <strong>RxJS Observables</strong>. Observables represent declarative asynchronous data streams that can be cancelled (unsubscribed), retried, debounced, combined with other streams, and mapped over time.</li>
+<h3 class='doc-h3'>4.4 Connection Pooling in Relational Databases</h3>
+<li class='doc-li'>Opening a TCP connection to MySQL requires a three-way network handshake, authentication verification, and memory allocation. Opening and closing connections for every single HTTP request degrades server throughput under load.</li>
+<li class='doc-li'>In <code>config/db.js</code>, <code>mysql2.createPool({ connectionLimit: 10 })</code> maintains a ready pool of 10 open connections. When an API request arrives, it borrows an idle connection, executes the query, and instantly returns it to the pool for the next user.</li>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>5. Frontend Deep-Dive (Angular 12 SPA)</h2>
+<h3 class='doc-h3'>5.1 Project Directory Breakdown</h3>
+<pre class='code-block'><code class='language-'>frontend/src/
+├── app/
+│   ├── components/
+│   │   ├── employee-detail/    # Inspect single employee details
+│   │   ├── employee-form/      # Unified Add/Edit employee form
+│   │   └── employee-list/      # Searchable, filterable employee table
+│   ├── models/
+│   │   └── employee.ts         # TypeScript data contract
+│   ├── services/
+│   │   └── employee.service.ts # HTTP network communication layer
+│   ├── app-routing.module.ts   # URL route declarations
+│   ├── app.component.html      # Root master template with header/footer
+│   ├── app.component.ts        # Root component logic
+│   └── app.module.ts           # Root dependency injection container
+├── environments/
+│   ├── environment.ts          # Local development API endpoint
+│   └── environment.prod.ts     # Production deployment API endpoint
+├── index.html                  # Entry HTML host page
+├── main.ts                     # Application bootstrap entry point
+├── polyfills.ts                # Browser compatibility shims
+└── styles.css                  # Global design system &amp; theme variables</code></pre>
+<h3 class='doc-h3'>5.2 The Employee Model (<code>models/employee.ts</code>)</h3>
+<p class='doc-p'>Defines the strict TypeScript data structure matching the database entity:</p>
+<pre class='code-block'><code class='language-typescript'>export interface Employee {
+  id?: number;              // Optional for new records before DB assignment
+  name: string;            // Employee full name
+  email: string;           // Unique corporate email address
+  department: string;      // Assigned department (e.g., Engineering)
+  designation: string;     // Job title (e.g., Software Engineer)
+  salary: number;          // Compensation figure
+  created_at?: string;     // ISO timestamp of creation
+  updated_at?: string;     // ISO timestamp of last modification
+}</code></pre>
+<h3 class='doc-h3'>5.3 The Employee Service Layer (<code>services/employee.service.ts</code>)</h3>
+<p class='doc-p'>Encapsulates all REST network calls, insulating components from HTTP configuration:</p>
+<li class='doc-li'><code>getAll(): Observable&lt;Employee[]&gt;</code> -&gt; <code>GET /api/employees</code></li>
+<li class='doc-li'><code>getById(id: number): Observable&lt;Employee&gt;</code> -&gt; <code>GET /api/employees/:id</code></li>
+<li class='doc-li'><code>create(employee: Employee): Observable&lt;Employee&gt;</code> -&gt; <code>POST /api/employees</code></li>
+<li class='doc-li'><code>update(id: number, employee: Employee): Observable&lt;Employee&gt;</code> -&gt; <code>PUT /api/employees/:id</code></li>
+<li class='doc-li'><code>delete(id: number): Observable&lt;{ message: string; id: number }&gt;</code> -&gt; <code>DELETE /api/employees/:id</code></li>
+<h3 class='doc-h3'>5.4 Components Breakdown</h3>
+<h4 class='doc-h4'>1. <code>EmployeeListComponent</code></h4>
+<li class='doc-li'><strong>Template</strong>: Renders header controls, a search input bound via <code>[(ngModel)]=&quot;searchTerm&quot;</code>, an &quot;+ Add Employee&quot; action button, and a responsive table.</li>
+<li class='doc-li'><strong>Logic</strong>:</li>
+<li class='doc-li'><code>ngOnInit()</code> invokes <code>loadEmployees()</code> which subscribes to <code>employeeService.getAll()</code>.</li>
+<li class='doc-li'>Getter <code>filteredEmployees</code> performs case-insensitive substring matching on all fields.</li>
+<li class='doc-li'><code>deleteEmployee()</code> triggers a safety confirmation modal (<code>confirm(...)</code>). If confirmed, it dispatches the delete request, updates local array state via <code>filter()</code>, and flashes a 3-second success message.</li>
+<li class='doc-li'><strong>Responsive Card Fallback</strong>: Via CSS media queries (<code>@media (max-width: 768px)</code>), table rows collapse into vertical cards so the UI remains pristine on mobile phones.</li>
+<h4 class='doc-h4'>2. <code>EmployeeFormComponent</code></h4>
+<li class='doc-li'><strong>Dual Operation</strong>: Detects whether the route is <code>/add</code> or <code>/edit/:id</code>.</li>
+<li class='doc-li'><strong>Validation Rules</strong>:</li>
+<li class='doc-li'><code>name</code>: Required, max 100 characters.</li>
+<li class='doc-li'><code>email</code>: Required, valid email pattern.</li>
+<li class='doc-li'><code>department</code>: Required.</li>
+<li class='doc-li'><code>designation</code>: Required.</li>
+<li class='doc-li'><code>salary</code>: Required, non-negative (<code>Validators.min(0)</code>).</li>
+<li class='doc-li'><strong>Error Handling</strong>: Captures server validation errors (such as HTTP 409 Duplicate Email) and renders user-friendly alerts.</li>
+<h4 class='doc-h4'>3. <code>EmployeeDetailComponent</code></h4>
+<li class='doc-li'>Reads the employee <code>id</code> from the URL parameters via <code>route.snapshot.paramMap.get(&#x27;id&#x27;)</code>.</li>
+<li class='doc-li'>Retrieves the single employee record and presents a profile card featuring created and updated timestamps, department badges, and formatted currency.</li>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>6. Backend Deep-Dive (Node.js &amp; Express REST API)</h2>
+<h3 class='doc-h3'>6.1 Server Entry Point (<code>backend/server.js</code>)</h3>
+<p class='doc-p'>Establishes the middleware pipeline:</p>
+<pre class='code-block'><code class='language-javascript'>const express = require(&#x27;express&#x27;);
+const cors = require(&#x27;cors&#x27;);
+require(&#x27;dotenv&#x27;).config();
+
+const app = express();
+app.use(cors());              // Enable Cross-Origin requests
+app.use(express.json());      // Parse request body JSON
+
+app.use(&#x27;/api/employees&#x27;, employeeRoutes); // Mount modular employee routes
+app.use((req, res) =&gt; res.status(404).json({ message: &#x27;Route not found.&#x27; }));</code></pre>
+<h3 class='doc-h3'>6.2 Route Declarations (<code>backend/routes/employee.routes.js</code>)</h3>
+<p class='doc-p'>Maps incoming HTTP methods to controller logic:</p>
+<li class='doc-li'><code>router.get(&#x27;/&#x27;, controller.getAllEmployees);</code></li>
+<li class='doc-li'><code>router.get(&#x27;/:id&#x27;, controller.getEmployeeById);</code></li>
+<li class='doc-li'><code>router.post(&#x27;/&#x27;, controller.createEmployee);</code></li>
+<li class='doc-li'><code>router.put(&#x27;/:id&#x27;, controller.updateEmployee);</code></li>
+<li class='doc-li'><code>router.delete(&#x27;/:id&#x27;, controller.deleteEmployee);</code></li>
+<h3 class='doc-h3'>6.3 Controller Handlers (<code>backend/controllers/employee.controller.js</code>)</h3>
+<li class='doc-ol-li'><strong>1. </strong> <strong>Input Validation Helper (<code>validateEmployee</code>)</strong>:</li>
+<p class='doc-p'>Runs server-side assertions on all fields before touching the database. Validates non-empty strings, regex email format, and numerical positive salary.</p>
+<li class='doc-ol-li'><strong>2. </strong> <strong><code>getAllEmployees</code></strong>:</li>
+<p class='doc-p'>Executes <code>SELECT * FROM employees ORDER BY id DESC</code>. Returns array of employees.</p>
+<li class='doc-ol-li'><strong>3. </strong> <strong><code>getEmployeeById</code></strong>:</li>
+<p class='doc-p'>Executes parameterized query <code>SELECT * FROM employees WHERE id = ?</code>. If empty, returns HTTP 404 (<code>Employee not found.</code>).</p>
+<li class='doc-ol-li'><strong>4. </strong> <strong><code>createEmployee</code></strong>:</li>
+<p class='doc-p'>Validates inputs, executes <code>INSERT INTO employees (...) VALUES (?, ?, ?, ?, ?)</code>. If MySQL throws <code>ER_DUP_ENTRY</code>, responds with HTTP 409 Conflict. Returns created record with HTTP 201 Created.</p>
+<li class='doc-ol-li'><strong>5. </strong> <strong><code>updateEmployee</code></strong>:</li>
+<p class='doc-p'>Executes <code>UPDATE employees SET ... WHERE id = ?</code>. Verifies <code>result.affectedRows &gt; 0</code>.</p>
+<li class='doc-ol-li'><strong>6. </strong> <strong><code>deleteEmployee</code></strong>:</li>
+<p class='doc-p'>Executes <code>DELETE FROM employees WHERE id = ?</code>. Returns confirmation response.</p>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>7. Database Design &amp; Dual-Storage Architecture</h2>
+<h3 class='doc-h3'>7.1 Relational Schema (<code>backend/db/schema.sql</code>)</h3>
+<pre class='code-block'><code class='language-sql'>CREATE DATABASE IF NOT EXISTS employee_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE employee_db;
+
+CREATE TABLE IF NOT EXISTS employees (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  name        VARCHAR(100)   NOT NULL,
+  email       VARCHAR(150)   NOT NULL UNIQUE,
+  department  VARCHAR(100)   NOT NULL,
+  designation VARCHAR(100)   NOT NULL,
+  salary      DECIMAL(12, 2) NOT NULL DEFAULT 0,
+  created_at  TIMESTAMP      DEFAULT CURRENT_TIMESTAMP,
+  updated_at  TIMESTAMP      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);</code></pre>
+<h4 class='doc-h4'>Field Explanations:</h4>
+<li class='doc-li'><code>id INT AUTO_INCREMENT PRIMARY KEY</code>: Unique integer identifier indexed via B-Tree for fast O(1) lookups.</li>
+<li class='doc-li'><code>email VARCHAR(150) UNIQUE</code>: Guarantees no two employees share the same corporate email.</li>
+<li class='doc-li'><code>salary DECIMAL(12, 2)</code>: Exact fixed-point numerical representation to avoid floating-point rounding inaccuracies in financial data.</li>
+<li class='doc-li'><code>created_at</code> &amp; <code>updated_at</code>: Automated audit timestamps maintained natively by the database engine.</li>
+<h3 class='doc-h3'>7.2 Zero-Config Local Fallback Database (<code>backend/config/fallbackDb.js</code>)</h3>
+<p class='doc-p'>When developers run the application without installing MySQL:</p>
+<li class='doc-li'><code>fallbackDb.js</code> implements the exact MySQL Promise interface: <code>query(sql, params)</code>.</li>
+<li class='doc-li'>It loads initial seed data matching <code>schema.sql</code> (Aarav Sharma, Diya Nair, Rohan Verma, Ishita Rao).</li>
+<li class='doc-li'>All insertions, edits, and deletions are saved to <code>backend/data/employees.json</code> so data persists across server restarts.</li>
+<li class='doc-li'>Transparent proxy in <code>config/db.js</code> ensures controller code requires zero modifications.</li>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>8. Exhaustive Command Reference &amp; Command Dictionary</h2>
+<p class='doc-p'>This section provides a complete dictionary of every command utilized to build, run, configure, and maintain the system.</p>
+<h3 class='doc-h3'>8.1 Node.js &amp; Package Management Commands</h3>
+<div class='table-container'><table>
+<thead><tr><th>Command</th><th>Exact Meaning and Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>npm install</code></td><td>Reads <code>package.json</code> in the current folder, downloads all listed dependencies into <code>node_modules</code>, and creates a <code>package-lock.json</code>.</td></tr>
+<tr><td><code>npm install --legacy-peer-deps</code></td><td>Instructs npm to ignore strict peer-dependency version conflicts between older framework packages (Angular 12) and newer npm versions.</td></tr>
+<tr><td><code>npm start</code></td><td>Executes the pre-defined <code>&quot;start&quot;</code> script in <code>package.json</code> (runs <code>node server.js</code> in backend, or <code>ng serve</code> in frontend).</td></tr>
+<tr><td><code>npm run dev</code></td><td>Executes the development script utilizing <code>nodemon</code> for automatic server reloading upon file saves.</td></tr>
+<tr><td><code>npm run init-db</code></td><td>Executes <code>node db/init-db.js</code>, which reads <code>db/schema.sql</code> and executes table creation against MySQL automatically.</td></tr>
+<tr><td><code>npx ng build</code></td><td>Compiles the Angular application into static HTML, CSS, and JS bundles saved in <code>frontend/dist/</code>.</td></tr>
+<tr><td><code>npx ng serve</code></td><td>Launches the local Webpack dev server, compiles bundles in memory, watches for changes, and serves on port 4200.</td></tr>
+</tbody></table></div>
+<h3 class='doc-h3'>8.2 Environment Variable &amp; Compatibility Flags</h3>
+<div class='table-container'><table>
+<thead><tr><th>Command / Flag</th><th>Exact Meaning and Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>$env:NODE_OPTIONS=&quot;--openssl-legacy-provider&quot;</code></td><td><strong>PowerShell flag</strong>: In Node 17+, Node upgraded from OpenSSL 1.1.1 to OpenSSL 3.0, disabling older cryptographic hash algorithms (like MD4) used in Webpack 5/Angular 12. This flag reenables legacy algorithms, preventing <code>ERR_OSSL_EVP_UNSUPPORTED</code> build errors.</td></tr>
+<tr><td><code>export NODE_OPTIONS=--openssl-legacy-provider</code></td><td><strong>Linux / macOS equivalent</strong> of the above OpenSSL legacy provider command.</td></tr>
+</tbody></table></div>
+<h3 class='doc-h3'>8.3 Git Version Control Commands</h3>
+<div class='table-container'><table>
+<thead><tr><th>Command</th><th>Exact Meaning and Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>git status</code></td><td>Displays the status of the working directory and staging area, highlighting modified, staged, or untracked files.</td></tr>
+<tr><td><code>git add -A</code></td><td>Stages all changes (new files, modifications, and deletions) across the entire working tree for the next commit.</td></tr>
+<tr><td><code>git commit -m &quot;message&quot;</code></td><td>Records staged snapshots to the repository history with an explanatory message.</td></tr>
+<tr><td><code>git checkout --orphan &lt;name&gt;</code></td><td>Creates a completely new, independent branch with zero parent commits and a clean history.</td></tr>
+<tr><td><code>git branch -M main</code></td><td>Renames the current branch forcibly to <code>main</code>.</td></tr>
+<tr><td><code>git push origin main</code></td><td>Transmits local commits on branch <code>main</code> to the remote repository named <code>origin</code>.</td></tr>
+<tr><td><code>git push --force origin main</code></td><td>Overwrites the remote branch history with the local branch history (used after history rewriting).</td></tr>
+</tbody></table></div>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>9. Step-by-Step Setup, Deployment &amp; Execution Guide</h2>
+<h3 class='doc-h3'>Phase 1: Clone the Repository</h3>
+<pre class='code-block'><code class='language-bash'>git clone https://github.com/kshitijkhede/employee-management-system.git
+cd employee-management-system</code></pre>
+<h3 class='doc-h3'>Phase 2: Launch the Backend API</h3>
+<pre class='code-block'><code class='language-bash'>cd backend
+npm install
+npm start</code></pre>
+<li class='doc-li'>The server will boot on <code>http://localhost:3000</code>.</li>
+<li class='doc-li'>If MySQL is running, it connects automatically.</li>
+<li class='doc-li'>If MySQL is not running, it initializes the local fallback database.</li>
+<h3 class='doc-h3'>Phase 3: Launch the Frontend Client</h3>
+<p class='doc-p'>In a second terminal window:</p>
+<pre class='code-block'><code class='language-bash'>cd frontend
+npm install --legacy-peer-deps
+
+# For Node 17+ on Windows PowerShell:
+$env:NODE_OPTIONS=&quot;--openssl-legacy-provider&quot;; npm start
+
+# For Node 17+ on Linux/macOS:
+export NODE_OPTIONS=--openssl-legacy-provider &amp;&amp; npm start</code></pre>
+<h3 class='doc-h3'>Phase 4: Access the System</h3>
+<p class='doc-p'>Open your web browser and navigate to:</p>
+<pre class='code-block'><code class='language-'>http://localhost:4200</code></pre>
+<hr class='doc-hr'>
+<h2 class='doc-h2'>10. Alternative Technologies, Trade-offs &amp; Future Enhancements</h2>
+<h3 class='doc-h3'>10.1 Comparative Technology Evaluation</h3>
+<div class='table-container'><table>
+<thead><tr><th>Architectural Layer</th><th>Chosen in EMS</th><th>Viable Alternatives</th><th>Trade-offs &amp; Comparison</th></tr></thead>
+<tbody>
+<tr><td><strong>Frontend Framework</strong></td><td><strong>Angular 12</strong></td><td>React.js, Vue.js, Svelte</td><td>Angular provides a complete battery-included framework (Routing, Forms, HttpClient, Dependency Injection) out of the box. React requires assembling external libraries (React Router, Axios, Formik), while Vue provides a lighter curve.</td></tr>
+<tr><td><strong>Styling Solution</strong></td><td><strong>Vanilla CSS3</strong></td><td>Tailwind CSS, Bootstrap, Angular Material</td><td>Vanilla CSS keeps the bundle size minuscule and provides full custom styling control without third-party design dependencies. Tailwind accelerates rapid styling, while Angular Material provides pre-built accessible UI widgets.</td></tr>
+<tr><td><strong>Backend Framework</strong></td><td><strong>Express.js</strong></td><td>NestJS, Fastify, Koa</td><td>Express is the most battle-tested Node framework with minimal overhead. NestJS provides Angular-like TypeScript architecture (controllers, modules, providers) which is ideal for large enterprise backend codebases.</td></tr>
+<tr><td><strong>Database Engine</strong></td><td><strong>MySQL</strong></td><td>PostgreSQL, MongoDB, SQLite</td><td>MySQL is a world standard for structured relational data and ACID compliance. PostgreSQL provides advanced JSON indexing and GIS types. MongoDB is schemaless (better for unstructured documents).</td></tr>
+<tr><td><strong>Database Access</strong></td><td><strong>Raw SQL (<code>mysql2</code>)</strong></td><td>Prisma, TypeORM, Sequelize</td><td>Raw SQL provides total transparency, zero ORM overhead, and fine-tuned control over queries. ORMs (like Prisma) offer auto-generated TypeScript types and automatic schema migrations.</td></tr>
+</tbody></table></div>
+<h3 class='doc-h3'>10.2 Recommended Future Enhancements</h3>
+<li class='doc-ol-li'><strong>1. </strong> <strong>Authentication &amp; RBAC</strong>:</li>
+<li class='doc-li'>Integrate <strong>JSON Web Tokens (JWT)</strong> with HTTP-only cookies and bcrypt password hashing.</li>
+<li class='doc-li'>Implement Role-Based Access Control (<code>Admin</code>, <code>Manager</code>, <code>Employee</code>) with Angular Route Guards (<code>CanActivate</code>).</li>
+<li class='doc-ol-li'><strong>2. </strong> <strong>Server-Side Pagination &amp; Sorting</strong>:</li>
+<li class='doc-li'>For datasets exceeding 10,000 employees, transition from client-side filtering to SQL pagination using <code>LIMIT</code> and <code>OFFSET</code>.</li>
+<li class='doc-ol-li'><strong>3. </strong> <strong>Containerization with Docker</strong>:</li>
+<li class='doc-li'>Add a <code>docker-compose.yml</code> file to package the Angular client, Express server, and MySQL database into isolated containers with a single <code>docker compose up</code> command.</li>
+<li class='doc-ol-li'><strong>4. </strong> <strong>Automated Testing Suite</strong>:</li>
+<li class='doc-li'>Frontend unit tests via Jasmine &amp; Karma for components and services.</li>
+<li class='doc-li'>Backend integration tests via Jest and Supertest for REST API endpoints.</li>
+<hr class='doc-hr'>
+<p class='doc-p'><em>Documentation compiled and verified for Employee Management System.</em></p>
+</body>
+</html>
