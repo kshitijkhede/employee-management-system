@@ -1,0 +1,45 @@
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 14px 20px;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; }
+.brand-mark {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+.brand-text { font-weight: 600; font-size: 16px; }
+
+.app-main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.app-footer p {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  .brand-text { font-size: 14px; }
+}

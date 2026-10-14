@@ -1,0 +1,61 @@
+<div class="list-header">
+  <div>
+    <h2>Employees</h2>
+    <p class="subtitle">{{ employees.length }} record(s) in the database</p>
+  </div>
+  <a routerLink="/add" class="btn btn-primary">+ Add Employee</a>
+</div>
+
+<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+<div *ngIf="error" class="alert alert-error">{{ error }}</div>
+
+<div class="toolbar">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Search by name, email, department or designation…"
+    [(ngModel)]="searchTerm"
+  />
+</div>
+
+<div class="card table-card">
+  <div *ngIf="loading" class="state">Loading employees…</div>
+
+  <div *ngIf="!loading && filteredEmployees.length === 0" class="state">
+    <span *ngIf="employees.length === 0">No employees yet. Click “Add Employee” to create one.</span>
+    <span *ngIf="employees.length > 0">No employees match your search.</span>
+  </div>
+
+  <div class="table-wrapper" *ngIf="!loading && filteredEmployees.length > 0">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Designation</th>
+          <th class="num">Salary</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of filteredEmployees">
+          <td data-label="ID">{{ emp.id }}</td>
+          <td data-label="Name" class="strong">{{ emp.name }}</td>
+          <td data-label="Email">{{ emp.email }}</td>
+          <td data-label="Department">
+            <span class="badge">{{ emp.department }}</span>
+          </td>
+          <td data-label="Designation">{{ emp.designation }}</td>
+          <td data-label="Salary" class="num">{{ emp.salary | currency:'INR':'symbol':'1.0-0' }}</td>
+          <td data-label="Actions" class="actions">
+            <a [routerLink]="['/view', emp.id]" class="btn btn-ghost btn-sm">View</a>
+            <a [routerLink]="['/edit', emp.id]" class="btn btn-ghost btn-sm">Edit</a>
+            <button class="btn btn-danger btn-sm" (click)="deleteEmployee(emp)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

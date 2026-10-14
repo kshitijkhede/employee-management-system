@@ -1,0 +1,100 @@
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.list-header h2 { margin: 0; font-size: 22px; }
+.subtitle { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+.toolbar { margin-bottom: 16px; }
+.search-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.table-card { overflow: hidden; }
+.state { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 14px; }
+
+.table-wrapper { width: 100%; overflow-x: auto; }
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.employee-table thead th {
+  text-align: left;
+  padding: 14px 16px;
+  background: #f9fafc;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+}
+.employee-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.employee-table tbody tr:last-child td { border-bottom: none; }
+.employee-table tbody tr:hover { background: #fafbff; }
+.strong { font-weight: 600; }
+.num { text-align: right; }
+.actions-col { text-align: right; }
+.actions { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: #eef0fb;
+  color: var(--primary-dark);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---- Responsive: stacked cards on small screens ---- */
+@media (max-width: 760px) {
+  .employee-table thead { display: none; }
+  .employee-table,
+  .employee-table tbody,
+  .employee-table tr,
+  .employee-table td { display: block; width: 100%; }
+  .employee-table tr {
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .employee-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  .employee-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .num, .actions-col, .actions { text-align: left; justify-content: flex-end; }
+}

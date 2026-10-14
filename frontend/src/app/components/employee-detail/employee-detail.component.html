@@ -1,0 +1,31 @@
+<div class="detail-page">
+  <div class="back-row">
+    <a routerLink="/" class="btn btn-ghost btn-sm">← Back to list</a>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">{{ error }}</div>
+  <div *ngIf="loading" class="card state">Loading…</div>
+
+  <div class="card detail-card" *ngIf="employee && !loading">
+    <div class="detail-head">
+      <div class="avatar">{{ employee.name.charAt(0) }}</div>
+      <div>
+        <h2>{{ employee.name }}</h2>
+        <p class="muted">{{ employee.designation }} · {{ employee.department }}</p>
+      </div>
+    </div>
+
+    <dl class="detail-grid">
+      <div><dt>Employee ID</dt><dd>{{ employee.id }}</dd></div>
+      <div><dt>Email</dt><dd>{{ employee.email }}</dd></div>
+      <div><dt>Department</dt><dd>{{ employee.department }}</dd></div>
+      <div><dt>Designation</dt><dd>{{ employee.designation }}</dd></div>
+      <div><dt>Salary</dt><dd>{{ employee.salary | currency:'INR':'symbol':'1.0-0' }}</dd></div>
+      <div *ngIf="employee.created_at"><dt>Added on</dt><dd>{{ employee.created_at | date:'medium' }}</dd></div>
+    </dl>
+
+    <div class="detail-actions">
+      <a [routerLink]="['/edit', employee.id]" class="btn btn-primary">Edit</a>
+    </div>
+  </div>
+</div>

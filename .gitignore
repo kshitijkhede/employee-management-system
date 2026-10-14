@@ -1,0 +1,22 @@
+# ---- Dependencies ----
+node_modules/
+
+# ---- Environment / secrets ----
+.env
+*.local
+
+# ---- Angular build output ----
+frontend/dist/
+frontend/.angular/
+frontend/out-tsc/
+
+# ---- Logs ----
+*.log
+npm-debug.log*
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
