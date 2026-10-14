@@ -8,6 +8,7 @@ const path = require('path');
 
 const dataDir = path.join(__dirname, '..', 'data');
 const dataFile = path.join(dataDir, 'employees.json');
+const usersFile = path.join(dataDir, 'users.json');
 
 const SEED_DATA = [
   {
@@ -52,9 +53,21 @@ const SEED_DATA = [
   },
 ];
 
+// Default seeded admin user (username: admin, password: admin123)
+const SEED_USERS = [
+  {
+    id: 1,
+    username: 'admin',
+    password: '$2b$10$Z8KzKvSOZtrNTNDTB5YG5eqLnVQbZU4uj9U/aDhsH2uOW1vYk49ny',
+    role: 'admin',
+    created_at: '2026-10-14 10:00:00',
+  },
+];
+
 class FallbackDb {
   constructor() {
     this.employees = [];
+    this.users = [];
     this.load();
   }
 
@@ -63,27 +76,50 @@ class FallbackDb {
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true });
       }
+
+      // Load employees
       if (fs.existsSync(dataFile)) {
         const raw = fs.readFileSync(dataFile, 'utf8');
         this.employees = JSON.parse(raw);
       } else {
         this.employees = [...SEED_DATA];
-        this.save();
+        this.saveEmployees();
+      }
+
+      // Load users
+      if (fs.existsSync(usersFile)) {
+        const rawUsers = fs.readFileSync(usersFile, 'utf8');
+        this.users = JSON.parse(rawUsers);
+      } else {
+        this.users = [...SEED_USERS];
+        this.saveUsers();
       }
     } catch (err) {
       console.warn('[fallback-db] Error loading file, using seed data:', err.message);
       this.employees = [...SEED_DATA];
+      this.users = [...SEED_USERS];
     }
   }
 
-  save() {
+  saveEmployees() {
     try {
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true });
       }
       fs.writeFileSync(dataFile, JSON.stringify(this.employees, null, 2), 'utf8');
     } catch (err) {
-      console.error('[fallback-db] Error saving file:', err.message);
+      console.error('[fallback-db] Error saving employees file:', err.message);
+    }
+  }
+
+  saveUsers() {
+    try {
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
+      fs.writeFileSync(usersFile, JSON.stringify(this.users, null, 2), 'utf8');
+    } catch (err) {
+      console.error('[fallback-db] Error saving users file:', err.message);
     }
   }
 
@@ -95,6 +131,52 @@ class FallbackDb {
 
   async query(sql, params = []) {
     const trimmed = sql.trim().toUpperCase();
+
+    // ==========================================
+    // USER AUTH QUERIES
+    // ==========================================
+
+    // SELECT user by username: SELECT * FROM users WHERE username = ?
+    if (trimmed.startsWith('SELECT * FROM USERS WHERE USERNAME = ?')) {
+      const usernameParam = (params[0] || '').toLowerCase();
+      const found = this.users.find((u) => u.username.toLowerCase() === usernameParam);
+      return [found ? [{ ...found }] : [], []];
+    }
+
+    // SELECT user by id: SELECT * FROM users WHERE id = ?
+    if (trimmed.startsWith('SELECT * FROM USERS WHERE ID = ?')) {
+      const targetId = Number(params[0]);
+      const found = this.users.find((u) => u.id === targetId);
+      return [found ? [{ ...found }] : [], []];
+    }
+
+    // INSERT user: INSERT INTO users (username, password, role) VALUES (?, ?, ?)
+    if (trimmed.startsWith('INSERT INTO USERS')) {
+      const [username, password, role] = params;
+      const lower = username.toLowerCase();
+      if (this.users.some((u) => u.username.toLowerCase() === lower)) {
+        const err = new Error(`Duplicate entry '${username}' for key 'users.username'`);
+        err.code = 'ER_DUP_ENTRY';
+        throw err;
+      }
+      const maxId = this.users.length > 0 ? Math.max(...this.users.map((u) => u.id)) : 0;
+      const newId = maxId + 1;
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      const newRecord = {
+        id: newId,
+        username,
+        password,
+        role: role || 'admin',
+        created_at: now,
+      };
+      this.users.push(newRecord);
+      this.saveUsers();
+      return [{ insertId: newId, affectedRows: 1 }, []];
+    }
+
+    // ==========================================
+    // EMPLOYEE CRUD QUERIES
+    // ==========================================
 
     // 1. SELECT all: SELECT * FROM employees ORDER BY id DESC
     if (trimmed.startsWith('SELECT * FROM EMPLOYEES') && trimmed.includes('ORDER BY')) {
@@ -109,7 +191,7 @@ class FallbackDb {
       return [found ? [{ ...found }] : [], []];
     }
 
-    // 3. INSERT: INSERT INTO employees (name, email, department, designation, salary) VALUES (?, ?, ?, ?, ?)
+    // 3. INSERT employee: INSERT INTO employees (name, email, department, designation, salary) VALUES (?, ?, ?, ?, ?)
     if (trimmed.startsWith('INSERT INTO EMPLOYEES')) {
       const [name, email, department, designation, salary] = params;
       const emailLower = email.toLowerCase();
@@ -132,11 +214,11 @@ class FallbackDb {
         updated_at: now,
       };
       this.employees.push(newRecord);
-      this.save();
+      this.saveEmployees();
       return [{ insertId: newId, affectedRows: 1 }, []];
     }
 
-    // 4. UPDATE: UPDATE employees SET name = ?, email = ?, department = ?, designation = ?, salary = ? WHERE id = ?
+    // 4. UPDATE employee: UPDATE employees SET name = ?, email = ?, department = ?, designation = ?, salary = ? WHERE id = ?
     if (trimmed.startsWith('UPDATE EMPLOYEES')) {
       const [name, email, department, designation, salary, id] = params;
       const targetId = Number(id);
@@ -160,11 +242,11 @@ class FallbackDb {
         salary: Number(salary),
         updated_at: now,
       };
-      this.save();
+      this.saveEmployees();
       return [{ affectedRows: 1 }, []];
     }
 
-    // 5. DELETE: DELETE FROM employees WHERE id = ?
+    // 5. DELETE employee: DELETE FROM employees WHERE id = ?
     if (trimmed.startsWith('DELETE FROM EMPLOYEES WHERE ID = ?')) {
       const targetId = Number(params[0]);
       const index = this.employees.findIndex((e) => e.id === targetId);
@@ -172,7 +254,7 @@ class FallbackDb {
         return [{ affectedRows: 0 }, []];
       }
       this.employees.splice(index, 1);
-      this.save();
+      this.saveEmployees();
       return [{ affectedRows: 1 }, []];
     }
 

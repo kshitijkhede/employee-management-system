@@ -22,6 +22,22 @@ CREATE TABLE IF NOT EXISTS employees (
   updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- ============================================================
+--  Users table for Authentication & Security
+-- ============================================================
+CREATE TABLE IF NOT EXISTS users (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  username    VARCHAR(50)  NOT NULL UNIQUE,
+  password    VARCHAR(255) NOT NULL,
+  role        VARCHAR(20)  NOT NULL DEFAULT 'admin',
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Seed default admin user (password: admin123)
+INSERT INTO users (username, password, role) VALUES
+  ('admin', '$2b$10$Z8KzKvSOZtrNTNDTB5YG5eqLnVQbZU4uj9U/aDhsH2uOW1vYk49ny', 'admin')
+ON DUPLICATE KEY UPDATE username = VALUES(username);
+
 -- Optional seed data so the table-based UI is not empty on first run.
 INSERT INTO employees (name, email, department, designation, salary) VALUES
   ('Aarav Sharma',   'aarav.sharma@example.com',   'Engineering', 'Software Engineer',      72000.00),
@@ -29,3 +45,4 @@ INSERT INTO employees (name, email, department, designation, salary) VALUES
   ('Rohan Verma',    'rohan.verma@example.com',    'Finance',     'Financial Analyst',      75000.00),
   ('Ishita Rao',     'ishita.rao@example.com',     'Marketing',   'Marketing Lead',         70000.00)
 ON DUPLICATE KEY UPDATE email = VALUES(email);
+

@@ -8,7 +8,10 @@
 .header-inner {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; }
 .brand-mark {
@@ -21,6 +24,73 @@
   border-radius: 8px;
 }
 .brand-text { font-weight: 600; font-size: 16px; }
+
+/* User Menu & Logout */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #e0e7ff;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--text);
+}
+
+.user-role-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 1px 5px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-top: 2px;
+}
+
+.btn-signout {
+  background: #fff;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-signout:hover {
+  background: #fef2f2;
+  border-color: #f87171;
+}
 
 .app-main {
   max-width: 1040px;
@@ -41,5 +111,6 @@
 }
 
 @media (max-width: 560px) {
-  .brand-text { font-size: 14px; }
+  .brand-text { display: none; }
+  .user-meta { display: none; }
 }

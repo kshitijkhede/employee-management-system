@@ -4,6 +4,20 @@
       <span class="brand-mark">EMS</span>
       <span class="brand-text">Employee Management System</span>
     </a>
+
+    <!-- Auth user info and Logout button -->
+    <div class="user-menu" *ngIf="currentUser$ | async as user">
+      <div class="user-profile">
+        <span class="user-avatar">{{ user.username.charAt(0).toUpperCase() }}</span>
+        <div class="user-meta">
+          <span class="user-name">{{ user.username }}</span>
+          <span class="user-role-badge">{{ user.role }}</span>
+        </div>
+      </div>
+      <button type="button" class="btn-signout" (click)="logout()" title="Sign Out">
+        Sign Out
+      </button>
+    </div>
   </div>
 </header>
 
@@ -12,5 +26,5 @@
 </main>
 
 <footer class="app-footer">
-  <p>Angular 12 · Express · MySQL</p>
+  <p>Angular 12 · Express · MySQL · JWT Secured</p>
 </footer>

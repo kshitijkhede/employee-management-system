@@ -1,0 +1,80 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-badge">EMS</div>
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Please enter your credentials to access the Employee Management System</p>
+    </div>
+
+    <!-- Alert Banner -->
+    <div *ngIf="error" class="alert alert-error">
+      <span class="alert-icon">⚠️</span>
+      <span>{{ error }}</span>
+    </div>
+
+    <!-- Quick Demo Credentials Hint Box -->
+    <div class="demo-box">
+      <div class="demo-info">
+        <strong>Demo Credentials:</strong>
+        <code>admin</code> / <code>admin123</code>
+      </div>
+      <button type="button" class="btn-demo-fill" (click)="fillDemoCredentials()">Auto-Fill</button>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-wrapper">
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            placeholder="Enter your username"
+            [class.input-invalid]="submitted && f['username'].invalid"
+            autocomplete="username"
+          />
+        </div>
+        <div *ngIf="submitted && f['username'].invalid" class="field-error">
+          <span *ngIf="f['username'].errors?.['required']">Username is required.</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper password-input-wrapper">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Enter your password"
+            [class.input-invalid]="submitted && f['password'].invalid"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="toggle-password-btn"
+            (click)="togglePasswordVisibility()"
+            [title]="showPassword ? 'Hide password' : 'Show password'"
+          >
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        <div *ngIf="submitted && f['password'].invalid" class="field-error">
+          <span *ngIf="f['password'].errors?.['required']">Password is required.</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loading">
+        <span *ngIf="loading" class="spinner"></span>
+        <span>{{ loading ? 'Signing In...' : 'Sign In' }}</span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>Protected by JSON Web Tokens & Secure Password Hashing</p>
+    </div>
+  </div>
+</div>

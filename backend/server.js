@@ -7,6 +7,8 @@ const cors = require('cors');
 require('dotenv').config();
 
 const employeeRoutes = require('./routes/employee.routes');
+const authRoutes = require('./routes/auth.routes');
+const authenticateToken = require('./middleware/auth.middleware');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,8 +22,11 @@ app.get('/', (req, res) => {
   res.json({ status: 'ok', service: 'Employee Management API' });
 });
 
-// ---- Routes ----
-app.use('/api/employees', employeeRoutes);
+// ---- Authentication Routes (Public / Login) ----
+app.use('/api/auth', authRoutes);
+
+// ---- Employee Routes (Protected by JWT) ----
+app.use('/api/employees', authenticateToken, employeeRoutes);
 
 // ---- 404 fallback ----
 app.use((req, res) => {

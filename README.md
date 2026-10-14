@@ -17,9 +17,13 @@ A modern, responsive full-stack **Employee Management System** built with **Angu
   - **Read**: Browse records in a responsive table (with auto card collapse on mobile) and view full details.
   - **Update**: Pre-filled reactive edit form with live client & server duplicate email checks.
   - **Delete**: Safe removal with confirmation prompts and non-intrusive feedback toasts.
-- **Dual Database Architecture**:
-  - Connects to **MySQL** connection pool with parameterized queries.
-  - Includes an automatic **Persistent Local Fallback** (`backend/data/employees.json`) allowing immediate full functionality without needing an external database installed.
+- **Authentication & Security (JWT)**:
+  - Secure login with **bcrypt** password hashing and 24-hour **JSON Web Tokens (JWT)**.
+  - Angular **AuthGuard** protecting all internal management routes (unauthenticated users are redirected to `/login`).
+  - Angular **AuthInterceptor** automatically injecting `Authorization: Bearer <token>` into API requests.
+  - Default Administrator Credentials:
+    - **Username:** `admin`
+    - **Password:** `admin123` (Auto-fill button available on the login page)
 - **Responsive Modern UI**: Clean typography, accessible contrast, custom CSS design system, and mobile-friendly layouts.
 
 ---
